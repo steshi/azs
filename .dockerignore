@@ -1,0 +1,16 @@
+# virtual environments
+venv
+
+# Python files
+*.pyc
+__pycache__
+
+# Secret environment settings
+.env
+env
+
+# Node and Webpack files
+frontend/node_modules
+
+# Ignore sqlite
+db.sqlite3
