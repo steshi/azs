@@ -44,7 +44,6 @@ export const DopInfo = () => {
       <div className='dopinfo'>Select Azs<hr /></div>
     )
   }
-  console.log(info)
   return (
       <div className='dopinfo'>
         <b>{selectedAzs.azstype__name === 'tatneft' ? 'TATneft' : 'GazProm'}</b> <hr /><br/>
