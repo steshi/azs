@@ -18,10 +18,20 @@ def inform(request, id):
         })
 
 @api_view(['GET'])
-def stations(request):
+def stations(request, neLat, neLng, swLat, swLng):
     keys = ("id", "azstype__name", "number", "lat", "lon")
-    azs = AzsStation.objects.prefetch_related('azstype').all().values(*keys)
-    return Response({"data": azs})
+    azs = AzsStation.objects.prefetch_related('azstype').filter(
+        lat__range = (swLat, neLat),
+        lon__range = (swLng, neLng),
+    ).values(*keys)
+    ids = [x['id'] for x in list(azs.values('id'))]
+    fuels = SummaryForBenzine.objects.filter(azs__id__in=ids).prefetch_related("benzine", "azs")\
+    .values("benzine__name", "cost", 'discont', 'azs__id')
+    ai92 = fuels.filter(benzine__name='АИ 92').order_by('cost')[:10]
+    ai95 = fuels.filter(benzine__name='АИ 95').order_by('cost')[:10]
+    DT = fuels.filter(benzine__name='ДТ').order_by('cost')[:10]
+    lowcosters = {'ai92': ai92, 'ai95': ai95, 'DT': DT}
+    return Response({"data": azs, 'lowcosters': lowcosters})
 
 
 def map_tile(request, z, x, y):

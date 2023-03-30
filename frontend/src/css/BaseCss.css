@@ -28,9 +28,9 @@
   }
 
   .leaflet-container {
-    display: inline-block;
+    /* display: inline-block; */
     width: 80%;
-    height: 80vh; 
+    height: 100vh; 
     float: right;
     clear: right;
   } 
@@ -40,7 +40,6 @@
     vertical-align: top;
     padding: 20px;
     margin: 3px;
-
     border:thin solid;
   } 
   .pricetable {
@@ -48,3 +47,16 @@
     width: 250px;
   } 
 
+  .pricerange {
+    display: inline-block;
+    /* width: calc(20% - 6px);
+    vertical-align: top;
+    padding: 20px;
+    margin: 3px; */
+    border:thin solid;
+  } 
+  .center {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
